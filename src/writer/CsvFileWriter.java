@@ -13,11 +13,12 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import beans.City;
+import entrypoint.EntryPoint;
 
 public class CsvFileWriter implements IWriter{
 
 	@Override
-	public boolean write_file(List<City> file_to_write) {
+	public void write_file(List<City> file_to_write) {
 		if(file_to_write != null && file_to_write.size() > 0){
 			ICsvBeanWriter citywriter = null;
 			try {
@@ -26,8 +27,8 @@ public class CsvFileWriter implements IWriter{
 				 */
 				final String[] header = new String[] { "_id", "name", "type", "lat","longitutde"};
 				final CellProcessor[] processors = getProcessors();
-
-				citywriter = new CsvBeanWriter(new FileWriter("city.csv"),
+				String filename = EntryPoint.city_name.equals("") ? "city.csv" : EntryPoint.city_name+".csv"; 
+				citywriter = new CsvBeanWriter(new FileWriter(filename),
 						CsvPreference.STANDARD_PREFERENCE);
 
 				citywriter.writeHeader(header);
@@ -50,8 +51,10 @@ public class CsvFileWriter implements IWriter{
 				}
 
 			}
+		}else{
+			System.out.println("No result found for the requested city.");
+			
 		}
-		return false;
 	}
 	/**
 	 * A place holder for Super CSV , the library I used, I added the library for

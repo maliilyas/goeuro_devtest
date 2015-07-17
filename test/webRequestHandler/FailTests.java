@@ -2,8 +2,6 @@ package webRequestHandler;
 
 import static org.junit.Assert.assertFalse;
 
-import java.io.IOException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.junit.Test;
@@ -34,7 +32,6 @@ public class FailTests {
 
 		web_req_handler 	= new  WebRequestHandler();
 		response        	= web_req_handler.get_city_info(city_name_api);
-		StatusLine status 	= response.getStatusLine();
 		
 		web_req_handler.destroy();
 

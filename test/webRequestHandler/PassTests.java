@@ -33,7 +33,7 @@ public class PassTests {
 	String city_name_api           		    = "Berlin"; //Potsdam
 
 	WebRequestHandler web_req_handler		= null;
-	HttpResponse  response			= null;
+	HttpResponse  response					= null;
 
 
 	/**

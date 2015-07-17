@@ -6,6 +6,6 @@ import beans.City;
 
 public interface IWriter {
 	
-	public boolean write_file(List<City> file_to_write);
+	public void write_file(List<City> file_to_write);
 
 }
