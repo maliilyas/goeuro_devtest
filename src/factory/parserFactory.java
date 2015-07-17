@@ -1,7 +1,7 @@
 package factory;
 
 import parser.IParser;
-import parser.jsonParser;
+import parser.JsonParser;
 /**
  * 
  * @author Ali 
@@ -12,7 +12,7 @@ public class parserFactory {
 	
 	public static IParser parser(byte parser_type){
 		if (parser_type == constants.json_parser)
-			return  new jsonParser();
+			return  new JsonParser();
 		else if (parser_type == constants.xml_parser)
 			return null; // null should be replaced with proper parser if need arises.
 		else throw new IllegalArgumentException("Could Not Find Appropriate Parser!");

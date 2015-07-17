@@ -1,11 +1,14 @@
 package parser;
 
-public class jsonParser implements IParser{
+import java.util.List;
+
+import beans.City;
+
+public class JsonParser implements IParser{
 
 	
 	@Override
-	public Object get_parsed_data(Object data) {
-		// TODO Auto-generated method stub
+	public List<City> get_parsed_data(Object data) {
 		return null;
 	}
 	
