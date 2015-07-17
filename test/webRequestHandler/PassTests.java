@@ -4,16 +4,19 @@ package webRequestHandler;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.junit.Test;
 
+import beans.City;
 import factory.constants;
 import factory.parserFactory;
+import factory.writerFactory;
 import parser.IParser;
 import webhandler.WebRequestHandler;
+import writer.IWriter;
 
 /**
  * 
@@ -27,7 +30,7 @@ public class PassTests {
 
 	String city_name3						= "ArkhamCity";
 
-	String city_name_api           		    = "Potsdam";
+	String city_name_api           		    = "Berlin"; //Potsdam
 
 	WebRequestHandler web_req_handler		= null;
 	HttpResponse  response			= null;
@@ -57,7 +60,9 @@ public class PassTests {
 		assertEquals(status.getReasonPhrase(),"OK");
 		
 		IParser json_parser = parserFactory.parser(constants.json_parser);
-		json_parser.consume_response(response);
+		List<City> cities = json_parser.consume_response(response);
+		IWriter writer    = writerFactory.writer(constants.csv_writer);
+		writer.write_file(cities);
 		web_req_handler.destroy();
 
 	}
