@@ -33,6 +33,7 @@ public class EntryPoint {
 					List<City> cities = json_parser.consume_response(response);
 					IWriter writer    = writerFactory.writer(constants.csv_writer);
 					writer.write_file(cities);
+					web_req_handler.destroy();
 				}else{
 					System.out.println((String.format("The request status is %s and not Ok.",status)));
 				}
