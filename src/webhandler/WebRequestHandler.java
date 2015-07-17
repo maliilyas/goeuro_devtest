@@ -2,8 +2,8 @@ package webhandler;
 
 import java.io.IOException;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -18,9 +18,9 @@ public class WebRequestHandler {
 	public static String api_query = "http://api.goeuro.com/api/v2/position/suggest/en/%s";
 	private CloseableHttpClient http_client  = null;
 	private HttpGet http_get					= null;
-	private CloseableHttpResponse response	= null;
+	private HttpResponse  response	= null;
 
-	public  CloseableHttpResponse get_city_info(String city_name){
+	public  HttpResponse  get_city_info(String city_name){
 		if(isValidCityName(city_name)){
 			api_query = String.format(api_query, city_name);
 			http_client = HttpClients.createDefault();
@@ -44,7 +44,8 @@ public class WebRequestHandler {
 	 * @return
 	 */
 	public static boolean isValidCityName(String city_name){
-		if(!city_name.equals("") && !city_name.matches(".*[0-9].*"))
+		if(!city_name.equals("") && !city_name.matches(".*[\\s*0-9].*") )
+			
 			return true;
 		else
 			return false;
@@ -57,8 +58,6 @@ public class WebRequestHandler {
 		try{
 			if(http_client != null )
 				http_client.close();
-			if(response != null)
-				response.close();
 		}catch(IOException io){
 			io.printStackTrace();
 
