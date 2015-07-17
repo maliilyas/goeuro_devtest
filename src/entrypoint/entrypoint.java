@@ -17,8 +17,8 @@ public class EntryPoint {
 	public static String city_name			= "";
 
 	public static void main(String [] args){
-		if(args.length < 1){
-			throw new IllegalArgumentException("Probably the name of the city is missing!");
+		if(args.length != 1){
+			throw new IllegalArgumentException("There Should be only one name for the City!");
 		}else{
 			try{
 				WebRequestHandler web_req_handler		= null;

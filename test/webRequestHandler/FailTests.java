@@ -3,7 +3,6 @@ package webRequestHandler;
 import static org.junit.Assert.assertFalse;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
 import org.junit.Test;
 
 import webhandler.WebRequestHandler;
