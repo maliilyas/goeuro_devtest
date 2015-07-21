@@ -22,19 +22,26 @@ public class EntryPoint {
 		}else{
 			try{
 				WebRequestHandler web_req_handler		= null;
-				HttpResponse  response			= null;
+				HttpResponse  response					= null;
 				city_name = args[0];
-				web_req_handler 	= new  WebRequestHandler();
-				response        	= web_req_handler.get_city_info(city_name);
-				String status 	= response.getStatusLine().getReasonPhrase();
-				 	   
-				if(status.equals("OK")){
-					IParser json_parser = parserFactory.parser(constants.json_parser);
-					List<City> cities = json_parser.consume_response(response);
-					IWriter writer    = writerFactory.writer(constants.csv_writer);
-					writer.write_file(cities);
+				web_req_handler 						= new  WebRequestHandler();
+				response        						= web_req_handler.get_city_info(city_name);
+				if(response != null){
+					String status 						= response.getStatusLine().getReasonPhrase();
+
+					if(status.equals("OK")){
+						IParser json_parser = parserFactory.parser(constants.json_parser);
+						List<City> cities = json_parser.consume_response(response);
+						IWriter writer    = writerFactory.writer(constants.csv_writer);
+						writer.write_file(cities);
+						System.out.println("The csv is written.");
+						web_req_handler.destroy();
+					}
+					else{
+						System.out.println((String.format("The request status is %s and not Ok.",status)));
+					}
 				}else{
-					System.out.println((String.format("The request status is %s and not Ok.",status)));
+					System.out.println("Can not get the response.");
 				}
 
 			}catch(IndexOutOfBoundsException e){

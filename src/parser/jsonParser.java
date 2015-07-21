@@ -32,8 +32,8 @@ public class JsonParser implements IParser{
 					
 					cities					= new ArrayList<City>(jsonArray.length());
 					int length				= jsonArray.length();
+					
 					for(int i = 0 ; i  < length ; i++){
-						
 						JSONObject jsonCity = (JSONObject) jsonArray.get(i);
 						City city			= new City();
 						city.set_id(Integer.toString(jsonCity.getInt("_id")));

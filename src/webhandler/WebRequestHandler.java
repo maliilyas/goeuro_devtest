@@ -16,17 +16,17 @@ import org.apache.http.impl.client.HttpClients;
 public class WebRequestHandler {
 
 	public static String api_query = "http://api.goeuro.com/api/v2/position/suggest/en/%s";
-	private CloseableHttpClient http_client  = null;
+	private CloseableHttpClient http_client  	= null;
 	private HttpGet http_get					= null;
-	private HttpResponse  response	= null;
+	private HttpResponse  response				= null;
 
 	public  HttpResponse  get_city_info(String city_name){
 		if(isValidCityName(city_name)){
-			api_query = String.format(api_query, city_name);
-			http_client = HttpClients.createDefault();
-			http_get    = new HttpGet(api_query);
+			api_query 							= String.format(api_query, city_name);
+			http_client 						= HttpClients.createDefault();
+			http_get    						= new HttpGet(api_query);
 			try {
-				response    = http_client.execute(http_get);
+				response    					= http_client.execute(http_get);
 			} catch (ClientProtocolException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -45,7 +45,7 @@ public class WebRequestHandler {
 	 */
 	public static boolean isValidCityName(String city_name){
 		if(!city_name.equals("") && !city_name.matches(".*[\\s*0-9].*") )
-			
+
 			return true;
 		else
 			return false;
